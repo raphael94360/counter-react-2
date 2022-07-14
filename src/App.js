@@ -1,22 +1,18 @@
-import "./App.scss";
-import Header from "./components/Header";
-import Counter from "./components/Counter";
-import Footer from "./components/Footer";
-import { useState } from "react";
+import "./App.scss"
+import Header from "./components/Header"
+import Counter from "./components/Counter"
+import Footer from "./components/Footer"
+import { useState } from "react"
 
 function App() {
-  const [counter, setCounter] = useState([]);
-
+  const [counters, setCounters] = useState([0])
+  const newTab = [...counters]
   const display = () => {
-    const newTab = [...counter];
-    newTab.push(<Counter />);
-    setCounter(newTab);
-    // return <div>{counter}</div>;
-    counter.map((el, index) => {
-      console.log(el);
-      return <div key={index}>{el}</div>;
-    });
-  };
+    if (counters.length < 3) {
+      newTab.push(0)
+      setCounters(newTab)
+    }
+  }
 
   return (
     <div className="App">
@@ -24,12 +20,18 @@ function App() {
       <button onClick={display}> Add a counter </button>
 
       <main>
-        <Counter />
+        {counters.map((element, index) => {
+          return (
+            <div key={index}>
+              <Counter value={element} setCounters={setCounters} counters={counters} newTab={newTab} numero={index} key={index} />
+            </div>
+          )
+        })}
       </main>
 
       <Footer text={"React Counter 2 made with React by Raphaël"} />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

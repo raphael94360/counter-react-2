@@ -1,23 +1,22 @@
-import { useState } from "react";
-
-const Counter = () => {
-  const [counter, setCounter] = useState(0);
-
+const Counter = props => {
   return (
     <>
       <div className="counter">
         <button
           onClick={() => {
-            setCounter(counter - 1);
+            // console.log(props.key)
+            props.newTab[props.numero] = props.newTab[props.numero] - 1
+            props.setCounters(props.newTab)
           }}
         >
           {" "}
           -{" "}
         </button>
-        <div>{counter}</div>
+        <div>{props.value}</div>
         <button
           onClick={() => {
-            setCounter(counter + 1);
+            props.newTab[props.numero] = props.newTab[props.numero] + 1
+            props.setCounters(props.newTab)
           }}
         >
           {" "}
@@ -26,7 +25,8 @@ const Counter = () => {
         <div>
           <button
             onClick={() => {
-              setCounter(0);
+              props.newTab[props.numero] = 0
+              props.setCounters(props.newTab)
             }}
           >
             {" "}
@@ -35,7 +35,7 @@ const Counter = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Counter;
+export default Counter
